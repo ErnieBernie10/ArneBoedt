@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arne Boedt • C# Architecture &amp; AI Transformation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #1e3a8a;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-font {
+            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .nav-link {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link:hover {
+            color: #1e40af;
+        }
+
+        .section-header {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+        }
+
+        .service-card {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                       box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .nav-active {
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .tech-badge {
+            background-color: #f1e7ff;
+            color: #4338ca;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.125rem 0.625rem;
+            border-radius: 9999px;
+        }
+
+        .accent {
+            color: #1e40af;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+        }
+
+        .subtle-grid {
+            background-image: 
+                linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+                linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+            background-size: 48px 48px;
+            opacity: 0.4;
+        }
+
+        .metric {
+            transition: all 0.3s ease;
+        }
+
+        .insight-card {
+            transition: all 0.2s ease;
+        }
+        
+        .insight-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-scrolled {
+            box-shadow: 0 1px 0 0 #f1f5f9;
+            background-color: rgba(255,255,255,0.96);
+            backdrop-filter: blur(12px);
+        }
+
+        .value-prop {
+            transition: all .2s ease;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+    <!-- Navbar -->
+    <nav id="navbar" class="bg-white border-b border-slate-200 sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="px-8 py-5 flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="w-9 h-9 bg-slate-900 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold text-2xl tracking-tighter">AB</span>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-2xl tracking-tight">Arne Boedt</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
+                    <a href="about.html" class="nav-link text-slate-600 hover:text-slate-900">About</a>
+                    <a href="services.html" class="nav-link text-slate-600 hover:text-slate-900">Services</a>
+                    <a href="blog.html" class="nav-link text-slate-600 hover:text-slate-900">Blog</a>
+                    <a href="contact.html" class="nav-link text-slate-600 hover:text-slate-900">Contact</a>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hidden md:flex items-center gap-x-3">
+                    <a href="contact.html" 
+                       class="px-5 py-2.5 text-sm font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors">
+                        Book a call
+                    </a>
+                    <a href="contact.html" 
+                       class="px-5 py-2.5 text-sm font-semibold bg-slate-900 hover:bg-slate-800 text-white rounded-xl transition-all active:scale-[0.985]">
+                        Get in touch
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn"
+                        class="md:hidden w-10 h-10 flex items-center justify-center text-slate-700 hover:bg-slate-100 rounded-xl transition-colors"
+                        aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-6 py-4">
+            <div class="flex flex-col gap-y-1 text-sm font-medium">
+                <a href="about.html" class="mobile-nav-link px-4 py-3 text-slate-700 rounded-xl hover:bg-slate-100">About</a>
+                <a href="services.html" class="mobile-nav-link px-4 py-3 text-slate-700 rounded-xl hover:bg-slate-100">Services</a>
+                <a href="blog.html" class="mobile-nav-link px-4 py-3 text-slate-700 rounded-xl hover:bg-slate-100">Blog</a>
+                <a href="contact.html" class="mobile-nav-link px-4 py-3 text-slate-700 rounded-xl hover:bg-slate-100">Contact</a>
+                
+                <div class="pt-3 flex flex-col gap-y-2">
+                    <a href="contact.html" class="px-4 py-3 text-center font-medium text-slate-700 border border-slate-200 rounded-2xl hover:bg-slate-50">Book a call</a>
+                    <a href="contact.html" class="px-4 py-3 text-center font-semibold bg-slate-900 text-white rounded-2xl">Get in touch</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="max-w-screen-xl mx-auto pt-12 pb-16 px-8">
+        <div class="grid md:grid-cols-12 gap-x-8 items-center">
+            <div class="md:col-span-7 lg:col-span-7">
+                <div class="max-w-2xl">
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-x-2 bg-white shadow-sm border border-slate-200 rounded-full px-4 py-1.5 mb-6">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                            <span class="ml-2 text-xs font-semibold tracking-wider text-emerald-700">AVAILABLE FOR 2026 ENGAGEMENTS</span>
+                        </div>
+                    </div>
+
+                    <h1 class="heading-font text-6xl lg:text-7xl leading-none font-semibold tracking-tighter text-slate-900">
+                        C# Architecture.<br>
+                        <span class="accent">AI Evolution.</span>
+                    </h1>
+                    
+                    <p class="mt-6 max-w-md text-xl text-slate-600 leading-relaxed">
+                        I help ambitious organizations modernize their .NET platforms 
+                        and responsibly embed AI to create lasting competitive advantage.
+                    </p>
+
+                    <div class="mt-9 flex flex-wrap items-center gap-x-4 gap-y-3">
+                        <a href="services.html" 
+                           class="inline-flex items-center justify-center px-8 py-4 rounded-2xl text-base font-semibold bg-slate-900 text-white hover:bg-slate-800 transition-all active:scale-[0.985]">
+                            Explore services
+                        </a>
+                        <a href="contact.html" 
+                           class="inline-flex items-center justify-center px-6 py-4 rounded-2xl text-base font-semibold border border-slate-300 hover:bg-white transition-all">
+                            <i class="fa-regular fa-calendar mr-2"></i>
+                            <span>Schedule a consultation</span>
+                        </a>
+                    </div>
+
+                    <div class="mt-8 flex items-center gap-x-6 text-sm">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full border-2 border-white overflow-hidden ring-1 ring-slate-200"><img src="https://i.pravatar.cc/32?img=28" alt=""></div>
+                            <div class="w-8 h-8 rounded-full border-2 border-white overflow-hidden ring-1 ring-slate-200"><img src="https://i.pravatar.cc/32?img=47" alt=""></div>
+                            <div class="w-8 h-8 rounded-full border-2 border-white overflow-hidden ring-1 ring-slate-200"><img src="https://i.pravatar.cc/32?img=40" alt=""></div>
+                        </div>
+                        <div class="text-slate-600 text-sm">
+                            Trusted by engineering leaders at <span class="font-medium text-slate-800">40+ companies</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero visual -->
+            <div class="md:col-span-5 lg:col-span-5 mt-10 md:mt-0">
+                <div class="relative bg-white rounded-3xl shadow-xl shadow-slate-900/5 border border-slate-200 p-2">
+                    <div class="bg-slate-900 rounded-2xl p-7 text-white">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <div class="uppercase tracking-[3px] text-xs font-semibold text-slate-400">Current focus</div>
+                                <div class="mt-1 text-2xl font-semibold tracking-tight">Enterprise AI Platform</div>
+                            </div>
+                            <div class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-medium rounded-full flex items-center gap-x-1.5">
+                                <i class="fa-solid fa-check"></i>
+                                <span class="font-semibold">In progress</span>
+                            </div>
+                        </div>
+                        
+                        <div class="my-7 h-px bg-slate-700"></div>
+                        
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <div class="text-xs text-slate-400">Architecture</div>
+                                <div class="mt-1 text-xl font-semibold">.NET 9</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">AI Layer</div>
+                                <div class="mt-1 text-xl font-semibold">Azure OpenAI</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">Team size</div>
+                                <div class="mt-1 text-xl font-semibold">42 engineers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Trust bar -->
+    <div class="border-y border-slate-200 bg-white">
+        <div class="max-w-screen-xl mx-auto px-8 py-5">
+            <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 opacity-75">
+                <div class="flex items-center gap-x-2 text-sm font-medium text-slate-500">
+                    <i class="fa-solid fa-building"></i>
+                    <span class="font-semibold tracking-tight">Global Bank</span>
+                </div>
+                <div class="flex items-center gap-x-2 text-sm font-medium text-slate-500">
+                    <span class="font-semibold tracking-tight">MedTech Solutions</span>
+                </div>
+                <div class="flex items-center gap-x-2 text-sm font-medium text-slate-500">
+                    <span class="font-semibold tracking-tight">LogiCorp</span>
+                </div>
+                <div class="flex items-center gap-x-2 text-sm font-medium text-slate-500">
+                    <span class="font-semibold tracking-tight">Vertex Capital</span>
+                </div>
+                <div class="flex items-center gap-x-2 text-sm font-medium text-slate-500">
+                    <span class="font-semibold tracking-tight">Aether Dynamics</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About -->
+    <section id="about" class="max-w-screen-xl mx-auto px-8 pt-16 pb-10">
+        <div class="grid md:grid-cols-12 gap-x-12 items-center">
+            <div class="md:col-span-5">
+                <div class="uppercase tracking-[2px] text-xs font-semibold text-slate-500 mb-3">About me</div>
+                <h2 class="section-header leading-none tracking-tighter">15+ years building<br>systems that scale.</h2>
+            </div>
+            <div class="md:col-span-7 mt-6 md:mt-2">
+                <div class="prose prose-slate max-w-none text-[15.2px]">
+                    <p class="text-slate-600 leading-relaxed">
+                        I'm Arne Boedt, a principal IT consultant with deep expertise in enterprise .NET systems. 
+                        My practice focuses exclusively on two interconnected disciplines: <strong>modern C# and .NET architecture</strong> 
+                        and <strong>responsible AI adoption</strong> within complex enterprise environments.
+                    </p>
+                    <p class="mt-4 text-slate-600 leading-relaxed">
+                        I work directly with CTOs, VP Engineering, and architecture teams to design platforms that are 
+                        maintainable for the next decade while unlocking new capabilities through carefully integrated AI.
+                    </p>
+                </div>
+
+                <div class="mt-6 flex flex-wrap gap-2">
+                    <div class="inline-flex items-center gap-2 rounded-2xl bg-white px-4 py-2 text-sm border border-slate-200">
+                        <i class="fa-solid fa-globe text-slate-400"></i>
+                        <span class="font-medium">Based in Belgium • Remote worldwide</span>
+                    </div>
+                    <div class="inline-flex items-center gap-2 rounded-2xl bg-white px-4 py-2 text-sm border border-slate-200">
+                        <span class="font-medium">Microsoft MVP • .NET</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key stats -->
+    <div class="max-w-screen-xl mx-auto px-8 pb-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-white border border-slate-200 rounded-3xl p-6">
+                <div class="text-4xl font-semibold tracking-tighter stat-number">140</div>
+                <div class="text-sm text-slate-500 mt-1">Architecture reviews delivered</div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-3xl p-6">
+                <div class="text-4xl font-semibold tracking-tighter stat-number">38</div>
+                <div class="text-sm text-slate-500 mt-1">AI transformation programs</div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-3xl p-6">
+                <div class="text-4xl font-semibold tracking-tighter stat-number">92%</div>
+                <div class="text-sm text-slate-500 mt-1">Repeat client rate</div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-3xl p-6">
+                <div class="text-4xl font-semibold tracking-tighter stat-number">19</div>
+                <div class="text-sm text-slate-500 mt-1">Countries worked in</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services -->
+    <section id="services" class="max-w-screen-xl mx-auto px-8 py-12">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-3 mb-9">
+            <div>
+                <div class="uppercase text-xs tracking-[2px] font-semibold text-slate-500 mb-2">What I do</div>
+                <h2 class="section-header tracking-tighter">Services</h2>
+            </div>
+            <p class="max-w-sm text-slate-600">Focused engagements designed for measurable impact.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5">
+            <!-- Service 1: C# Architecture -->
+            <div class="service-card bg-white border border-slate-200 rounded-3xl p-8 flex flex-col">
+                <div class="w-11 h-11 rounded-2xl bg-indigo-100 flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-code text-indigo-700 text-2xl"></i>
+                </div>
+                <h3 class="font-semibold text-2xl tracking-tight">C# &amp; .NET Architecture</h3>
+                <p class="mt-3 text-slate-600 text-[15px] leading-relaxed">
+                    Design and evolve enterprise-grade systems using modern .NET that are simple to understand and expensive to break.
+                </p>
+                
+                <ul class="mt-7 space-y-3 text-sm flex-1">
+                    <li class="flex items-start gap-x-2.5">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span>Domain-driven design &amp; clean architecture</span>
+                    </li>
+                    <li class="flex items-start gap-x-2.5">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span>Microservices, modular monoliths &amp; event-driven systems</span>
+                    </li>
+                    <li class="flex items-start gap-x-2.5">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span>Performance, resilience &amp; observability patterns</span>
+                    </li>
+                    <li class="flex items-start gap-x-2.5">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span>Legacy modernization &amp; technical debt remediation</span>
+                    </li>
+                    <li class="flex items-start gap-x-2.5">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span>Platform engineering &amp; internal developer platforms</span>
+                    </li>
+                </ul>
+
+                <div class="mt-8 pt-6 border-t border-slate-100">
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="tech-badge">.NET 8 / 9</span>
+                        <span class="tech-badge">C# 12</span>
+                        <span class="tech-badge">ASP.NET Core</span>
+                        <span class="tech-badge">Azure</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2: AI Evolution -->
+            <div class="service-card bg-white border border-slate-200 rounded-3xl p-8 flex flex-col">
+                <div class="w-11 h-11 rounded-2xl bg-teal-100 flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-brain text-teal-700 text-2xl"></i>
+                </div>
+                <h3 class="font-semibold text-2xl tracking-tight">AI Evolution Programs</h3>
+                <p class="mt-3 text-slate-600 text-[15px] leading-relaxed">
+                    Move beyond pilots. I help organizations embed AI into their operating model and core technology stack.
+                </p>
+                
+                <ul class="mt-7 space-y-3 text-sm flex-1">
+                    <li class="flex items-start gap-x-2.5">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span>AI readiness assessments &amp; strategic roadmaps</span>
+                    </li>
+                    <li class="flex items-start gap-x-2.5">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span>Integrating LLMs into existing .NET platforms</span>
+                    </li>
+                    <li class="flex items-start gap-x-2.5">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span>Responsible AI governance and risk frameworks</span>
+                    </li>
+                    <li class="flex items-start gap-x-2.5">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span>Data strategy, retrieval systems &amp; RAG patterns</span>
+                    </li>
+                    <li class="flex items-start gap-x-2.5">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span>Change management and team enablement</span>
+                    </li>
+                </ul>
+
+                <div class="mt-8 pt-6 border-t border-slate-100">
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="tech-badge">Azure OpenAI</span>
+                        <span class="tech-badge">Semantic Kernel</span>
+                        <span class="tech-badge">LangChain.NET</span>
+                        <span class="tech-badge">MLOps</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 3: Advisory -->
+            <div class="service-card bg-white border border-slate-200 rounded-3xl p-8 flex flex-col">
+                <div class="w-11 h-11 rounded-2xl bg-amber-100 flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-comments text-amber-600 text-2xl"></i>
+                </div>
+                <h3 class="font-semibold text-2xl tracking-tight">Strategic Advisory</h3>
+                <p class="mt-3 text-slate-600 text-[15px] leading-relaxed">
+                    Targeted interventions for leadership teams and architecture groups who need clarity and direction.
+                </p>
+                
+                <ul class="mt-7 space-y-3 text-sm flex-1">
+                    <li class="flex items-start gap-x-2.5">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span>Architecture decision reviews &amp; ADRs</span>
+                    </li>
+                    <li class="flex items-start gap-x-2.5">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span>Executive workshops &amp; strategy offsites</span>
+                    </li>
+                    <li class="flex items-start gap-x-2.5">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span>Technical due diligence for M&amp;A</span>
+                    </li>
+                    <li class="flex items-start gap-x-2.5">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span>Team capability assessments &amp; coaching</span>
+                    </li>
+                    <li class="flex items-start gap-x-2.5">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span>Project rescue and turnaround consulting</span>
+                    </li>
+                </ul>
+
+                <div class="mt-8 pt-6 border-t border-slate-100">
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="tech-badge">Workshops</span>
+                        <span class="tech-badge">1:1 Advisory</span>
+                        <span class="tech-badge">Retainers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Approach -->
+    <section id="approach" class="max-w-screen-xl mx-auto px-8 py-14 border-t border-slate-200 bg-white">
+        <div class="max-w-2xl">
+            <div class="uppercase tracking-[2px] text-xs font-semibold text-slate-500 mb-2">How I work</div>
+            <h2 class="section-header tracking-tighter">A pragmatic, outcome-oriented approach.</h2>
+            <p class="mt-4 text-slate-600">Every engagement is tailored. These four phases form the foundation of most successful projects.</p>
+        </div>
+
+        <div class="mt-10 grid md:grid-cols-4 gap-6">
+            <div class="value-prop group">
+                <div class="flex items-center justify-center w-9 h-9 rounded-2xl bg-slate-900 text-white font-mono text-sm mb-4">01</div>
+                <h4 class="font-semibold tracking-tight text-lg">Discover &amp; Align</h4>
+                <p class="mt-1.5 text-sm text-slate-600">Stakeholder interviews, current state analysis, business goals mapping, and risk identification.</p>
+            </div>
+            <div class="value-prop group">
+                <div class="flex items-center justify-center w-9 h-9 rounded-2xl bg-slate-900 text-white font-mono text-sm mb-4">02</div>
+                <h4 class="font-semibold tracking-tight text-lg">Design &amp; Validate</h4>
+                <p class="mt-1.5 text-sm text-slate-600">Target architecture, reference implementations, proof-of-concepts, and decision records.</p>
+            </div>
+            <div class="value-prop group">
+                <div class="flex items-center justify-center w-9 h-9 rounded-2xl bg-slate-900 text-white font-mono text-sm mb-4">03</div>
+                <h4 class="font-semibold tracking-tight text-lg">Implement &amp; Iterate</h4>
+                <p class="mt-1.5 text-sm text-slate-600">Hands-on architecture guidance, pair programming with teams, and iterative delivery support.</p>
+            </div>
+            <div class="value-prop group">
+                <div class="flex items-center justify-center w-9 h-9 rounded-2xl bg-slate-900 text-white font-mono text-sm mb-4">04</div>
+                <h4 class="font-semibold tracking-tight text-lg">Transfer &amp; Scale</h4>
+                <p class="mt-1.5 text-sm text-slate-600">Documentation, training, knowledge transfer, and establishing long-term internal practices.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work / Case Studies -->
+    <section id="work" class="max-w-screen-xl mx-auto px-8 py-12">
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <div class="uppercase text-xs tracking-[2px] font-semibold text-slate-500 mb-2">Selected work</div>
+                <h2 class="section-header tracking-tighter">Impact in action</h2>
+            </div>
+            <a href="contact.html" class="hidden md:inline-flex items-center text-sm font-medium text-slate-700 hover:text-slate-900">
+                Discuss a project <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+            </a>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5">
+            <!-- Case 1 -->
+            <div class="bg-white border border-slate-200 rounded-3xl overflow-hidden">
+                <div class="h-2 bg-indigo-600"></div>
+                <div class="p-7">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <div class="text-xs uppercase tracking-widest font-semibold text-indigo-700">Financial Services</div>
+                            <div class="font-semibold text-xl tracking-tight mt-1">Global Bank</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs text-slate-500">2024–2025</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <div class="text-sm text-slate-600">Re-architected the core transaction processing platform from a 15-year-old monolith into a modern, event-driven .NET 8 system.</div>
+                    </div>
+
+                    <div class="mt-6 grid grid-cols-3 gap-3 text-xs">
+                        <div>
+                            <div class="text-emerald-600 font-semibold">4.2×</div>
+                            <div class="text-slate-500">throughput</div>
+                        </div>
+                        <div>
+                            <div class="text-emerald-600 font-semibold">64%</div>
+                            <div class="text-slate-500">lower latency</div>
+                        </div>
+                        <div>
+                            <div class="text-emerald-600 font-semibold">−70%</div>
+                            <div class="text-slate-500">deployment time</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 2 -->
+            <div class="bg-white border border-slate-200 rounded-3xl overflow-hidden">
+                <div class="h-2 bg-teal-600"></div>
+                <div class="p-7">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <div class="text-xs uppercase tracking-widest font-semibold text-teal-700">Manufacturing</div>
+                            <div class="font-semibold text-xl tracking-tight mt-1">Aether Dynamics</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs text-slate-500">2025</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <div class="text-sm text-slate-600">Designed and implemented a predictive maintenance platform that combined .NET microservices with real-time sensor data and generative AI insights.</div>
+                    </div>
+
+                    <div class="mt-6 grid grid-cols-3 gap-3 text-xs">
+                        <div>
+                            <div class="text-emerald-600 font-semibold">38%</div>
+                            <div class="text-slate-500">fewer breakdowns</div>
+                        </div>
+                        <div>
+                            <div class="text-emerald-600 font-semibold">19 days</div>
+                            <div class="text-slate-500">to first production</div>
+                        </div>
+                        <div>
+                            <div class="text-emerald-600 font-semibold">82</div>
+                            <div class="text-slate-500">plants onboarded</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 3 -->
+            <div class="bg-white border border-slate-200 rounded-3xl overflow-hidden">
+                <div class="h-2 bg-amber-600"></div>
+                <div class="p-7">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <div class="text-xs uppercase tracking-widest font-semibold text-amber-700">Healthcare</div>
+                            <div class="font-semibold text-xl tracking-tight mt-1">MedTech Solutions</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs text-slate-500">2024</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <div class="text-sm text-slate-600">Guided a responsible GenAI program to reduce clinical documentation burden, built on top of a modernized .NET clinical platform.</div>
+                    </div>
+
+                    <div class="mt-6 grid grid-cols-3 gap-3 text-xs">
+                        <div>
+                            <div class="text-emerald-600 font-semibold">52%</div>
+                            <div class="text-slate-500">time saved</div>
+                        </div>
+                        <div>
+                            <div class="text-emerald-600 font-semibold">100%</div>
+                            <div class="text-slate-500">HIPAA &amp; GDPR</div>
+                        </div>
+                        <div>
+                            <div class="text-emerald-600 font-semibold">3.8k</div>
+                            <div class="text-slate-500">clinicians</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="max-w-screen-xl mx-auto px-8 py-14 bg-white border-t border-slate-200">
+        <div class="max-w-3xl mx-auto text-center mb-9">
+            <div class="text-xs tracking-[2px] font-semibold text-slate-500 mb-2">WHAT CLIENTS SAY</div>
+            <h2 class="section-header tracking-tighter">Trusted by leaders who value clarity.</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5">
+            <div class="border border-slate-200 rounded-3xl p-7 bg-slate-50">
+                <div class="flex gap-x-1 text-amber-400 mb-4">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <blockquote class="text-slate-700 leading-relaxed">
+                    “Alex brought a rare combination of deep technical rigor and the ability to communicate architecture trade-offs to the executive team. Our .NET modernization delivered ahead of schedule.”
+                </blockquote>
+                <div class="mt-6 flex items-center gap-x-3">
+                    <div class="w-9 h-9 rounded-full bg-slate-300 overflow-hidden"><img src="https://i.pravatar.cc/36?img=32" alt=""></div>
+                    <div>
+                        <div class="font-semibold text-sm">Sarah Patel</div>
+                        <div class="text-xs text-slate-500">CTO, Vertex Capital</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border border-slate-200 rounded-3xl p-7 bg-slate-50">
+                <div class="flex gap-x-1 text-amber-400 mb-4">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <blockquote class="text-slate-700 leading-relaxed">
+                    “The AI program Alex helped us design is the first one that actually moved the needle on productivity while staying compliant. His pragmatic approach to governance was invaluable.”
+                </blockquote>
+                <div class="mt-6 flex items-center gap-x-3">
+                    <div class="w-9 h-9 rounded-full bg-slate-300 overflow-hidden"><img src="https://i.pravatar.cc/36?img=15" alt=""></div>
+                    <div>
+                        <div class="font-semibold text-sm">Dr. Thomas Berg</div>
+                        <div class="text-xs text-slate-500">Head of Digital, MedTech Solutions</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border border-slate-200 rounded-3xl p-7 bg-slate-50">
+                <div class="flex gap-x-1 text-amber-400 mb-4">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <blockquote class="text-slate-700 leading-relaxed">
+                    “Working with Alex transformed how our engineering organization thinks about systems. The modular monolith we implemented is now the gold standard inside the company.”
+                </blockquote>
+                <div class="mt-6 flex items-center gap-x-3">
+                    <div class="w-9 h-9 rounded-full bg-slate-300 overflow-hidden"><img src="https://i.pravatar.cc/36?img=60" alt=""></div>
+                    <div>
+                        <div class="font-semibold text-sm">Lukas Moreau</div>
+                        <div class="text-xs text-slate-500">VP Engineering, LogiCorp</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights -->
+    <section id="insights" class="max-w-screen-xl mx-auto px-8 py-12">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <div class="uppercase tracking-[2px] text-xs font-semibold text-slate-500">Insights</div>
+                <h2 class="section-header tracking-tighter">Recent writing</h2>
+            </div>
+            <a href="blog.html" class="hidden md:block text-sm font-medium text-slate-600 hover:text-slate-900">View all articles →</a>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5">
+            <a href="blog/modern-csharp-architecture-2026.html" class="insight-card group block bg-white border border-slate-200 rounded-3xl p-7 hover:border-slate-300">
+                <div class="text-xs text-slate-500">January 2026 • Architecture</div>
+                <h4 class="mt-3 font-semibold tracking-tight text-lg group-hover:text-slate-900">Modern C# Architecture Patterns for 2026</h4>
+                <p class="text-sm mt-2 text-slate-600 line-clamp-3">A pragmatic look at modular monoliths, vertical slices, and event-driven systems in large .NET organizations.</p>
+                <div class="mt-4 text-xs font-semibold text-slate-700 group-hover:text-slate-900 inline-flex items-center">Read article <i class="ml-1.5 fa-solid fa-arrow-right text-xs"></i></div>
+            </a>
+
+            <a href="blog/ai-adoption-dotnet-enterprise.html" class="insight-card group block bg-white border border-slate-200 rounded-3xl p-7 hover:border-slate-300">
+                <div class="text-xs text-slate-500">December 2025 • AI</div>
+                <h4 class="mt-3 font-semibold tracking-tight text-lg group-hover:text-slate-900">Lessons from 18 Months of Production LLM Integration</h4>
+                <p class="text-sm mt-2 text-slate-600 line-clamp-3">What actually worked (and what was expensive) when adding generative AI to enterprise .NET platforms.</p>
+                <div class="mt-4 text-xs font-semibold text-slate-700 group-hover:text-slate-900 inline-flex items-center">Read article <i class="ml-1.5 fa-solid fa-arrow-right text-xs"></i></div>
+            </a>
+
+            <a href="blog/responsible-ai-governance.html" class="insight-card group block bg-white border border-slate-200 rounded-3xl p-7 hover:border-slate-300">
+                <div class="text-xs text-slate-500">October 2025 • Governance</div>
+                <h4 class="mt-3 font-semibold tracking-tight text-lg group-hover:text-slate-900">Building a Responsible AI Governance Framework</h4>
+                <p class="text-sm mt-2 text-slate-600 line-clamp-3">Practical patterns for risk management, auditability, and human oversight in regulated environments.</p>
+                <div class="mt-4 text-xs font-semibold text-slate-700 group-hover:text-slate-900 inline-flex items-center">Read article <i class="ml-1.5 fa-solid fa-arrow-right text-xs"></i></div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <div class="max-w-screen-xl mx-auto px-8 pb-10">
+        <div class="rounded-3xl bg-slate-900 text-white px-8 py-10 md:py-12 md:px-12">
+            <div class="max-w-2xl">
+                <div class="uppercase tracking-[2px] text-xs text-slate-400 font-semibold">Ready to move forward?</div>
+                <h3 class="text-3xl tracking-tighter font-semibold mt-2">Let's discuss your architecture and AI goals.</h3>
+                <p class="mt-3 text-slate-300 text-[15px]">Most engagements begin with a 90-minute discovery call. No sales pitch — just an honest conversation about your challenges.</p>
+            </div>
+            
+            <div class="mt-7">
+                <a href="contact.html" 
+                   class="inline-flex items-center gap-x-2 rounded-2xl bg-white px-6 py-3.5 text-sm font-semibold text-slate-900 hover:bg-slate-100 transition-colors">
+                    <span>Book a discovery call</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="max-w-screen-xl mx-auto px-8 pt-4 pb-16">
+        <div class="grid md:grid-cols-12 gap-x-12">
+            <!-- Form -->
+            <div class="md:col-span-7">
+                <div class="mb-7">
+                    <div class="uppercase tracking-widest text-xs font-semibold text-slate-500">Next step</div>
+                    <h2 class="section-header tracking-tight mt-1">Tell me about your project</h2>
+                </div>
+
+                <form id="contact-form" class="space-y-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-slate-700 mb-1.5">Full name</label>
+                            <input type="text" id="name" name="name" required
+                                   class="w-full border border-slate-300 rounded-2xl px-4 py-3 text-sm placeholder:text-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400">
+                        </div>
+                        <div>
+                            <label for="company" class="block text-sm font-medium text-slate-700 mb-1.5">Company</label>
+                            <input type="text" id="company" name="company" required
+                                   class="w-full border border-slate-300 rounded-2xl px-4 py-3 text-sm placeholder:text-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-700 mb-1.5">Work email</label>
+                            <input type="email" id="email" name="email" required
+                                   class="w-full border border-slate-300 rounded-2xl px-4 py-3 text-sm placeholder:text-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400">
+                        </div>
+                        <div>
+                            <label for="interest" class="block text-sm font-medium text-slate-700 mb-1.5">Primary interest</label>
+                            <select id="interest" name="interest" 
+                                    class="w-full border border-slate-300 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 bg-white">
+                                <option value="C# Architecture">C# &amp; .NET Architecture</option>
+                                <option value="AI Evolution">AI Evolution &amp; Integration</option>
+                                <option value="Both">Both Architecture + AI</option>
+                                <option value="Advisory">Strategic Advisory / Workshop</option>
+                                <option value="Other">Other / Not sure yet</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-slate-700 mb-1.5">What are you trying to achieve?</label>
+                        <textarea id="message" name="message" rows="4" required
+                                  class="w-full border border-slate-300 rounded-3xl px-4 py-3.5 text-sm placeholder:text-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 resize-y"
+                                  placeholder="We're looking to modernize our core platform and evaluate AI use cases in the next 12 months..."></textarea>
+                    </div>
+
+                    <div class="pt-1">
+                        <button type="submit" 
+                                class="w-full sm:w-auto px-9 py-3.5 bg-slate-900 hover:bg-black transition-colors text-white font-semibold rounded-2xl text-sm active:scale-[0.985]">
+                            Send message
+                        </button>
+                        <p class="text-xs text-slate-500 mt-3">I typically respond within two business days.</p>
+                    </div>
+                </form>
+
+                <!-- Success message -->
+                <div id="form-success" class="hidden mt-6 rounded-3xl border border-emerald-200 bg-emerald-50 px-6 py-5">
+                    <div class="flex gap-x-3">
+                        <i class="fa-solid fa-check-circle text-emerald-600 mt-0.5 text-xl"></i>
+                        <div>
+                            <div class="font-semibold text-emerald-800">Thank you. Your message has been received.</div>
+                            <p class="text-sm text-emerald-700 mt-1">I'll personally review your inquiry and get back to you shortly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact info sidebar -->
+            <div class="md:col-span-5 mt-12 md:mt-0">
+                <div class="bg-white border border-slate-200 rounded-3xl p-8">
+                    <div class="text-sm font-medium text-slate-700">Direct contact</div>
+                    
+                    <div class="mt-5 space-y-5 text-sm">
+                        <div>
+                            <div class="font-medium text-slate-500 text-xs">EMAIL</div>
+                            <a href="mailto:arne@arneboedt.be" class="text-slate-900 hover:underline">arne@arneboedt.be</a>
+                        </div>
+                        <div>
+                            <div class="font-medium text-slate-500 text-xs">CALENDLY</div>
+                            <a href="#" class="text-slate-900 hover:underline">calendly.com/arneboedt</a>
+                        </div>
+                        <div>
+                            <div class="font-medium text-slate-500 text-xs">LINKEDIN</div>
+                            <a href="#" class="text-slate-900 hover:underline">linkedin.com/in/arneboedt</a>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-slate-200">
+                        <div class="text-xs uppercase font-semibold tracking-widest text-slate-500">ENGAGEMENT TYPES</div>
+                        <div class="mt-3 flex flex-wrap gap-2 text-sm">
+                            <div class="px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-700">Fixed-scope projects</div>
+                            <div class="px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-700">Retainer advisory</div>
+                            <div class="px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-700">Workshops</div>
+                            <div class="px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-700">Interim architecture</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 bg-white">
+        <div class="max-w-screen-xl mx-auto px-8 py-9">
+            <div class="flex flex-col md:flex-row justify-between gap-y-6 text-sm">
+                <div>
+                    <div class="flex items-center gap-x-2">
+                        <div class="w-6 h-6 bg-slate-900 rounded-lg flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">AB</span>
+                        </div>
+                        <span class="font-semibold tracking-tight">Arne Boedt</span>
+                    </div>
+                    <div class="text-slate-500 mt-1 text-xs">Principal IT Consultant • C# Architecture &amp; AI Transformation</div>
+                </div>
+
+                <div class="flex flex-wrap gap-x-7 gap-y-1 text-slate-600 text-sm">
+                    <a href="about.html" class="hover:text-slate-900">About</a>
+                    <a href="services.html" class="hover:text-slate-900">Services</a>
+                    <a href="blog.html" class="hover:text-slate-900">Blog</a>
+                    <a href="contact.html" class="hover:text-slate-900">Contact</a>
+                </div>
+
+                <div class="text-xs text-slate-500 md:text-right">
+                    © 2026 Arne Boedt. All rights reserved.<br>
+                    <span class="text-[10px]">Independent consultancy. No agency markup.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tailwind script configuration
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent', '#1e40af');
+        }
+
+        // Navbar scroll effect
+        function setupNavbar() {
+            const navbar = document.getElementById('navbar');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('nav-scrolled');
+                } else {
+                    navbar.classList.remove('nav-scrolled');
+                }
+            });
+        }
+
+        // Mobile menu toggle
+        function setupMobileMenu() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelectorAll('.mobile-nav-link');
+
+            btn.addEventListener('click', () => {
+                const isHidden = menu.classList.contains('hidden');
+                
+                if (isHidden) {
+                    menu.classList.remove('hidden');
+                    btn.innerHTML = '<i class="fa-solid fa-times text-xl"></i>';
+                } else {
+                    menu.classList.add('hidden');
+                    btn.innerHTML = '<i class="fa-solid fa-bars text-xl"></i>';
+                }
+            });
+
+            // Close mobile menu when clicking a link
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                    btn.innerHTML = '<i class="fa-solid fa-bars text-xl"></i>';
+                });
+            });
+        }
+
+        // Smooth scroll for anchor links
+        function setupSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        e.preventDefault();
+                        
+                        const navbarHeight = document.getElementById('navbar').offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.scrollY - navbarHeight - 20;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Contact form handling
+        function setupContactForm() {
+            const form = document.getElementById('contact-form');
+            const successMessage = document.getElementById('form-success');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulate processing delay
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Sending...';
+                
+                setTimeout(() => {
+                    form.style.display = 'none';
+                    successMessage.classList.remove('hidden');
+                    successMessage.classList.add('flex');
+                    
+                    // Optional: Reset form after some time
+                    setTimeout(() => {
+                        form.reset();
+                        form.style.display = 'block';
+                        successMessage.classList.add('hidden');
+                        successMessage.classList.remove('flex');
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                    }, 6500);
+                }, 850);
+            });
+        }
+
+        // Simple counter animation for stats
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        stats.forEach(stat => {
+                            const target = parseFloat(stat.textContent);
+                            if (!isNaN(target)) {
+                                animateValue(stat, 0, target, 1600);
+                            }
+                        });
+                        observer.disconnect();
+                    }
+                });
+            }, { threshold: 0.6 });
+
+            if (stats.length > 0) {
+                observer.observe(stats[0].parentElement);
+            }
+        }
+
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                
+                if (element.textContent.includes('%')) {
+                    element.textContent = value + '%';
+                } else if (element.textContent.includes('×')) {
+                    element.textContent = value.toFixed(1) + '×';
+                } else {
+                    element.textContent = value;
+                }
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    // Restore original text with symbols
+                    if (element.textContent.includes('%')) {
+                        element.textContent = end + '%';
+                    } else if (element.getAttribute('data-original')) {
+                        element.textContent = element.getAttribute('data-original');
+                    }
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Keyboard accessibility enhancements
+        function setupAccessibility() {
+            // Allow pressing Enter on cards that are links
+            document.querySelectorAll('.insight-card').forEach(card => {
+                card.setAttribute('tabindex', '0');
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        const link = this.querySelector('a');
+                        if (link) link.click();
+                    }
+                });
+            });
+        }
+
+        // Initialize everything
+        function initialize() {
+            initializeTailwind();
+            setupNavbar();
+            setupMobileMenu();
+            setupSmoothScroll();
+            setupContactForm();
+            animateStats();
+            setupAccessibility();
+
+            // Optional: Log ready state (for debugging)
+            console.log('%c[Alex Rivera Consulting] Website initialized successfully.', 'color:#64748b;font-size:10px');
+        }
+
+        // Boot the site
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initialize);
+        } else {
+            initialize();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services • Arne Boedt | C# Architecture &amp; AI Transformation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-font {
+            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .nav-link {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link:hover {
+            color: #1e40af;
+        }
+
+        .section-header {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+        }
+
+        .service-card {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .nav-scrolled {
+            box-shadow: 0 1px 0 0 #f1f5f9;
+            background-color: rgba(255,255,255,0.96);
+            backdrop-filter: blur(12px);
+        }
+
+        .tech-badge {
+            background-color: #f1e7ff;
+            color: #4338ca;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.125rem 0.625rem;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+    <!-- Navbar -->
+    <nav id="navbar" class="bg-white border-b border-slate-200 sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="px-8 py-5 flex items-center justify-between">
+                <div class="flex items-center gap-x-3">
+                    <div class="w-9 h-9 bg-slate-900 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold text-2xl tracking-tighter">AB</span>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-2xl tracking-tight">Arne Boedt</span>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
+                    <a href="about.html" class="nav-link text-slate-600 hover:text-slate-900">About</a>
+                    <a href="services.html" class="nav-link text-slate-900 font-semibold">Services</a>
+                    <a href="blog.html" class="nav-link text-slate-600 hover:text-slate-900">Blog</a>
+                    <a href="contact.html" class="nav-link text-slate-600 hover:text-slate-900">Contact</a>
+                </div>
+
+                <div class="hidden md:flex items-center gap-x-3">
+                    <a href="contact.html" class="px-5 py-2.5 text-sm font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors">
+                        Book a call
+                    </a>
+                    <a href="contact.html" class="px-5 py-2.5 text-sm font-semibold bg-slate-900 hover:bg-slate-800 text-white rounded-xl transition-all active:scale-[0.985]">
+                        Get in touch
+                    </a>
+                </div>
+
+                <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center text-slate-700 hover:bg-slate-100 rounded-xl transition-colors" aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-6 py-4">
+            <div class="flex flex-col gap-y-1 text-sm font-medium">
+                <a href="about.html" class="mobile-nav-link px-4 py-3 text-slate-700 rounded-xl hover:bg-slate-100">About</a>
+                <a href="services.html" class="mobile-nav-link px-4 py-3 text-slate-700 rounded-xl hover:bg-slate-100 font-semibold">Services</a>
+                <a href="blog.html" class="mobile-nav-link px-4 py-3 text-slate-700 rounded-xl hover:bg-slate-100">Blog</a>
+                <a href="contact.html" class="mobile-nav-link px-4 py-3 text-slate-700 rounded-xl hover:bg-slate-100">Contact</a>
+                <div class="pt-3 flex flex-col gap-y-2">
+                    <a href="contact.html" class="px-4 py-3 text-center font-medium text-slate-700 border border-slate-200 rounded-2xl hover:bg-slate-50">Book a call</a>
+                    <a href="contact.html" class="px-4 py-3 text-center font-semibold bg-slate-900 text-white rounded-2xl">Get in touch</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="max-w-screen-xl mx-auto pt-14 pb-10 px-8">
+        <div class="max-w-3xl">
+            <div class="uppercase tracking-[2px] text-xs font-semibold text-slate-500">What I offer</div>
+            <h1 class="heading-font text-5xl md:text-6xl font-semibold tracking-tighter mt-2">Services</h1>
+            <p class="mt-4 text-xl text-slate-600 max-w-lg">Focused, high-impact engagements designed to deliver lasting architectural and AI capabilities.</p>
+        </div>
+    </header>
+
+    <!-- Services Grid -->
+    <section class="max-w-screen-xl mx-auto px-8 pb-14">
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- C# Architecture -->
+            <div class="service-card bg-white border border-slate-200 rounded-3xl p-8 flex flex-col">
+                <div class="w-11 h-11 rounded-2xl bg-indigo-100 flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-code text-indigo-700 text-2xl"></i>
+                </div>
+                <h3 class="font-semibold text-2xl tracking-tight">C# &amp; .NET Architecture</h3>
+                <p class="mt-3 text-slate-600">Design and evolve enterprise-grade .NET systems that remain maintainable for a decade or more.</p>
+                
+                <div class="mt-8 flex-1">
+                    <ul class="space-y-[13px] text-sm">
+                        <li class="flex gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Domain-Driven Design &amp; Clean Architecture</li>
+                        <li class="flex gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Modular monoliths &amp; microservices</li>
+                        <li class="flex gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Event-driven systems &amp; messaging</li>
+                        <li class="flex gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Performance, resilience &amp; observability</li>
+                        <li class="flex gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Legacy modernization &amp; platform engineering</li>
+                    </ul>
+                </div>
+                <div class="pt-7 mt-auto border-t border-slate-100">
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="tech-badge">.NET 8/9</span>
+                        <span class="tech-badge">C# 12</span>
+                        <span class="tech-badge">Azure</span>
+                        <span class="tech-badge">AWS</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Evolution -->
+            <div class="service-card bg-white border border-slate-200 rounded-3xl p-8 flex flex-col">
+                <div class="w-11 h-11 rounded-2xl bg-teal-100 flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-brain text-teal-700 text-2xl"></i>
+                </div>
+                <h3 class="font-semibold text-2xl tracking-tight">AI Evolution Programs</h3>
+                <p class="mt-3 text-slate-600">Move beyond experiments. Embed AI into your operating model and core technology stack safely.</p>
+                
+                <div class="mt-8 flex-1">
+                    <ul class="space-y-[13px] text-sm">
+                        <li class="flex gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> AI readiness assessments &amp; roadmaps</li>
+                        <li class="flex gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> LLM integration with existing .NET platforms</li>
+                        <li class="flex gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> RAG architectures &amp; semantic search</li>
+                        <li class="flex gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Responsible AI governance frameworks</li>
+                        <li class="flex gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> MLOps foundations &amp; team enablement</li>
+                    </ul>
+                </div>
+                <div class="pt-7 mt-auto border-t border-slate-100">
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="tech-badge">Azure OpenAI</span>
+                        <span class="tech-badge">Semantic Kernel</span>
+                        <span class="tech-badge">LangChain.NET</span>
+                        <span class="tech-badge">Vector DBs</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advisory -->
+            <div class="service-card bg-white border border-slate-200 rounded-3xl p-8 flex flex-col">
+                <div class="w-11 h-11 rounded-2xl bg-amber-100 flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-comments text-amber-600 text-2xl"></i>
+                </div>
+                <h3 class="font-semibold text-2xl tracking-tight">Strategic Advisory</h3>
+                <p class="mt-3 text-slate-600">Targeted interventions when you need clarity, direction, or an external perspective.</p>
+                
+                <div class="mt-8 flex-1">
+                    <ul class="space-y-[13px] text-sm">
+                        <li class="flex gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Architecture reviews &amp; decision records</li>
+                        <li class="flex gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Executive workshops &amp; strategy offsites</li>
+                        <li class="flex gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Technical due diligence (M&amp;A)</li>
+                        <li class="flex gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Team coaching &amp; capability building</li>
+                        <li class="flex gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Project rescue &amp; turnaround</li>
+                    </ul>
+                </div>
+                <div class="pt-7 mt-auto border-t border-slate-100">
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="tech-badge">Workshops</span>
+                        <span class="tech-badge">Retainers</span>
+                        <span class="tech-badge">1:1 Advisory</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engagement Models -->
+    <section class="max-w-screen-xl mx-auto px-8 py-12 border-t border-slate-200">
+        <h2 class="section-header tracking-tighter mb-8">How we can work together</h2>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white border border-slate-200 rounded-3xl p-7">
+                <h4 class="font-semibold">Project-based engagements</h4>
+                <p class="text-sm mt-2 text-slate-600">Fixed-scope work for architecture redesigns, AI platform builds, or modernization programs. Typical duration: 3–9 months.</p>
+                <div class="text-xs text-slate-500 mt-4">Best for: Clear outcomes with defined deliverables</div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-3xl p-7">
+                <h4 class="font-semibold">Advisory retainers</h4>
+                <p class="text-sm mt-2 text-slate-600">Ongoing access for architecture reviews, strategic guidance, and just-in-time decision support. Flexible monthly commitment.</p>
+                <div class="text-xs text-slate-500 mt-4">Best for: Leadership teams and architecture boards</div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-3xl p-7">
+                <h4 class="font-semibold">Workshops &amp; training</h4>
+                <p class="text-sm mt-2 text-slate-600">Intensive 1–3 day sessions on domain modeling, AI strategy, or modern .NET architecture patterns.</p>
+                <div class="text-xs text-slate-500 mt-4">Best for: Teams needing accelerated alignment</div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-3xl p-7">
+                <h4 class="font-semibold">Interim architecture leadership</h4>
+                <p class="text-sm mt-2 text-slate-600">Hands-on leadership while you hire or restructure your internal architecture function.</p>
+                <div class="text-xs text-slate-500 mt-4">Best for: Critical transitions</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="max-w-screen-xl mx-auto px-8 pb-14">
+        <div class="rounded-3xl bg-slate-900 px-8 py-9 text-white">
+            <div class="max-w-lg">
+                <div class="text-sm font-medium text-slate-400">Ready to explore a collaboration?</div>
+                <div class="mt-2 text-2xl font-semibold tracking-tight">Let's start with a conversation.</div>
+            </div>
+            <a href="contact.html" class="mt-6 inline-flex items-center gap-x-2 bg-white text-slate-900 hover:bg-slate-100 font-semibold px-6 py-3 rounded-2xl text-sm transition-all">
+                Schedule a discovery call
+            </a>
+        </div>
+    </div>
+
+    <footer class="border-t border-slate-200 bg-white">
+        <div class="max-w-screen-xl mx-auto px-8 py-9">
+            <div class="flex flex-col md:flex-row justify-between gap-y-6 text-sm">
+                <div>
+                    <div class="flex items-center gap-x-2">
+                        <div class="w-6 h-6 bg-slate-900 rounded-lg flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">AB</span>
+                        </div>
+                        <span class="font-semibold tracking-tight">Arne Boedt</span>
+                    </div>
+                    <div class="text-slate-500 mt-1 text-xs">Principal IT Consultant • C# Architecture &amp; AI Transformation</div>
+                </div>
+
+                <div class="flex flex-wrap gap-x-7 gap-y-1 text-slate-600 text-sm">
+                    <a href="about.html" class="hover:text-slate-900">About</a>
+                    <a href="services.html" class="hover:text-slate-900">Services</a>
+                    <a href="blog.html" class="hover:text-slate-900">Blog</a>
+                    <a href="contact.html" class="hover:text-slate-900">Contact</a>
+                </div>
+
+                <div class="text-xs text-slate-500 md:text-right">
+                    © 2026 Arne Boedt. All rights reserved.<br>
+                    <span class="text-[10px]">Independent consultancy. No agency markup.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) navbar.classList.add('nav-scrolled');
+            else navbar.classList.remove('nav-scrolled');
+        });
+
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                btn.innerHTML = '<i class="fa-solid fa-times text-xl"></i>';
+            } else {
+                menu.classList.add('hidden');
+                btn.innerHTML = '<i class="fa-solid fa-bars text-xl"></i>';
+            }
+        });
+    </script>
+</body>
+</html>

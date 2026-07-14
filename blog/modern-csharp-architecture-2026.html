@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern C# Architecture Patterns for 2026 • Arne Boedt</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        body { font-family: 'Inter', system_ui, sans-serif; }
+        .heading-font { font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif; font-weight: 600; letter-spacing: -0.025em; }
+        .nav-link { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .nav-link:hover { color: #1e40af; }
+        .nav-scrolled { box-shadow: 0 1px 0 0 #f1f5f9; background-color: rgba(255,255,255,0.96); backdrop-filter: blur(12px); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+    <nav id="navbar" class="bg-white border-b border-slate-200 sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="px-8 py-5 flex items-center justify-between">
+                <div class="flex items-center gap-x-3">
+                    <div class="w-9 h-9 bg-slate-900 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold text-2xl tracking-tighter">AB</span>
+                    </div>
+                    <a href="../index.html" class="font-semibold text-2xl tracking-tight">Arne Boedt</a>
+                </div>
+                <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
+                    <a href="../about.html" class="nav-link text-slate-600 hover:text-slate-900">About</a>
+                    <a href="../services.html" class="nav-link text-slate-600 hover:text-slate-900">Services</a>
+                    <a href="../blog.html" class="nav-link text-slate-900 font-semibold">Blog</a>
+                    <a href="../contact.html" class="nav-link text-slate-600 hover:text-slate-900">Contact</a>
+                </div>
+                <div class="hidden md:flex items-center gap-x-3">
+                    <a href="../contact.html" class="px-5 py-2.5 text-sm font-semibold bg-slate-900 text-white rounded-xl">Get in touch</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center"><i class="fa-solid fa-bars text-xl"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <article class="max-w-screen-md mx-auto px-8 pt-12 pb-20">
+        <a href="../blog.html" class="text-sm text-slate-500 hover:text-slate-700">← Back to all articles</a>
+        
+        <div class="mt-4 flex items-center gap-x-3 text-sm">
+            <span class="font-medium text-indigo-700">Architecture</span>
+            <span class="text-slate-400">•</span>
+            <span class="text-slate-500">January 8, 2026 • 11 min read</span>
+        </div>
+
+        <h1 class="heading-font mt-3 text-4xl md:text-5xl font-semibold tracking-tighter">Modern C# Architecture Patterns for 2026</h1>
+        
+        <div class="mt-6 prose prose-slate max-w-none">
+            <p class="lead text-xl text-slate-600">The .NET ecosystem has matured dramatically. In 2026, the question is no longer “can we build reliable enterprise systems in C#?” but rather “what is the simplest architecture that will serve us for the next ten years?”</p>
+            
+            <h2>The Death of the Big Rewrite</h2>
+            <p>Most organizations I work with have finally abandoned the dream of a complete platform rewrite. Instead, they are embracing incremental modernization strategies that deliver value continuously.</p>
+            
+            <h3>Modular Monoliths Are Winning</h3>
+            <p>In my experience working with teams of 30–150 engineers, a well-structured modular monolith often outperforms a distributed microservices architecture in terms of developer velocity, operational simplicity, and total cost of ownership — at least until you reach very specific scale thresholds.</p>
+            
+            <p>Key characteristics of successful modular monoliths in 2026:</p>
+            <ul>
+                <li>Strong module boundaries enforced by project structure and build-time checks</li>
+                <li>Vertical slice architecture inside each module</li>
+                <li>Clear ownership and deployment autonomy per module</li>
+                <li>Shared infrastructure concerns (auth, observability, messaging) extracted into platform libraries</li>
+            </ul>
+            
+            <h2>Practical Recommendations</h2>
+            <ol>
+                <li><strong>Start with vertical slices.</strong> Organize code around business capabilities rather than technical layers.</li>
+                <li><strong>Use the right level of abstraction.</strong> Don’t abstract too early. Let patterns emerge from real usage.</li>
+                <li><strong>Invest in your build and deployment pipeline.</strong> Fast feedback loops matter more than perfect architecture on day one.</li>
+                <li><strong>Design for observability from the beginning.</strong> Distributed tracing and structured logging are table stakes.</li>
+            </ol>
+            
+            <h2>Where Microservices Still Make Sense</h2>
+            <p>There are still legitimate use cases for microservices in 2026:</p>
+            <ul>
+                <li>Extreme scale requirements (think millions of requests per second)</li>
+                <li>Strict regulatory isolation between domains</li>
+                <li>Teams that truly cannot coordinate release cycles</li>
+                <li>Polyglot requirements where different services must use fundamentally different tech stacks</li>
+            </ul>
+            
+            <p>Even in these cases, I usually recommend starting with a modular monolith and extracting services only when the pain is real and measurable.</p>
+            
+            <div class="bg-slate-100 border-l-4 border-slate-400 pl-5 py-3 my-8 text-sm">
+                <strong>My rule of thumb:</strong> If you can’t explain the exact business problem that distributed transactions or eventual consistency will solve for you, you probably don’t need microservices yet.
+            </div>
+            
+            <h2>Looking Ahead</h2>
+            <p>The next interesting wave is the convergence of architecture and AI. The best platforms I see being built right now are designed from the ground up to make it easy to safely add LLM-powered capabilities later.</p>
+            
+            <p>This means paying close attention to:</p>
+            <ul>
+                <li>Well-defined domain boundaries and rich domain models</li>
+                <li>Event streams that can feed retrieval systems</li>
+                <li>Clear audit and decision logging</li>
+                <li>Strong contracts between services and consumers</li>
+            </ul>
+            
+            <p>Architecture decisions made today will directly determine how expensive or cheap it will be to adopt AI capabilities in the years to come.</p>
+        </div>
+        
+        <div class="mt-12 pt-8 border-t text-sm">
+            <a href="../contact.html" class="inline-flex items-center font-medium">Discuss your architecture challenges →</a>
+        </div>
+    </article>
+
+    <footer class="border-t border-slate-200 bg-white">
+        <div class="max-w-screen-xl mx-auto px-8 py-9 text-sm flex flex-col md:flex-row justify-between gap-y-4">
+            <div class="text-slate-500">© 2026 Arne Boedt</div>
+            <div>
+                <a href="../blog.html" class="hover:underline">All articles</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('nav-scrolled', window.scrollY > 10);
+        });
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        if (btn) btn.addEventListener('click', () => {
+            if (!menu) return;
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
