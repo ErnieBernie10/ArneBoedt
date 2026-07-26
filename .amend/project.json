@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "editableRoots": [ "." ],
+  "protectedPaths": [
+    ".github/**",
+    "package.json",
+    "package-lock.json"
+  ],
+  "generatedPaths": [],
+  "install": null,
+  "build": null,
+  "preview": {
+    "spaFallback": false
+  }
+}
