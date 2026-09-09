@@ -1,0 +1,41 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+    const posts = await getCollection('blog');
+    return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const date = post.data.pubDate.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+});
+---
+
+<BaseLayout title={`${post.data.title} • Arne Boedt`} active="blog" footer="compact">
+    <article class="max-w-screen-md mx-auto px-8 pt-12 pb-20">
+        <a href="/blog" class="text-sm text-slate-500 hover:text-slate-700">← Back to all articles</a>
+
+        <div class="mt-4 flex items-center gap-x-3 text-sm">
+            <span class={`font-medium ${post.data.accent}`}>{post.data.category}</span>
+            <span class="text-slate-400">•</span>
+            <span class="text-slate-500">{date} • {post.data.readTime}</span>
+        </div>
+
+        <h1 class="heading-font mt-3 text-4xl md:text-5xl font-semibold tracking-tighter">{post.data.title}</h1>
+
+        <div class="mt-6 prose prose-slate max-w-none">
+            <p class="lead text-xl text-slate-600">{post.data.description}</p>
+            <Content />
+        </div>
+
+        <div class="mt-12 pt-8 border-t text-sm">
+            <a href="/contact" class="inline-flex items-center font-medium">{post.data.cta} →</a>
+        </div>
+    </article>
+</BaseLayout>

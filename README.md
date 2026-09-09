@@ -1,9 +1,11 @@
 # Arne Boedt — IT Consultancy Website
 
-A clean, professional, multi-page static website for an IT consultant specializing in:
+A clean, professional, multi-page website for an IT consultant specializing in:
 
 - **C# & .NET Architecture** (Clean Architecture, DDD, microservices, modular monoliths, modernization)
 - **AI Evolution in Enterprises** (AI readiness, LLM integration, responsible AI, RAG, governance)
+
+Built with [Astro](https://astro.build).
 
 ## Features
 
@@ -11,40 +13,43 @@ A clean, professional, multi-page static website for an IT consultant specializi
 - Modern, minimal aesthetic with excellent typography
 - Mobile-friendly hamburger menu on all pages
 - Working contact form (simulated)
-- Case studies, testimonials, and a blog section with multiple posts
-- No build tools required — just open `index.html` or any .html file
+- Case studies, testimonials, and a blog section driven by an Astro content collection
+- Shared layout in `src/layouts/BaseLayout.astro`
 
 ## Tech
 
-- Plain HTML + CSS
+- Astro 7 (static output)
 - Tailwind CSS via CDN (for rapid high-quality styling)
 - Vanilla JavaScript
 - Font Awesome icons
 
 ## How to use
 
-1. Open `index.html` directly in any modern browser, or
-2. Serve it locally:
-   ```powershell
-   # Simple local server (PowerShell)
-   python -m http.server 8080
-   # or
-   npx serve .
-   ```
+```bash
+npm install
+npm run dev      # dev server on http://localhost:4321
+npm run build    # production build to dist/
+npm run preview  # serve the production build
+```
 
 ## Pages
 
-- `index.html` — Home with hero, services overview, case studies, testimonials, and recent writing
-- `about.html` — Detailed biography, experience, and values
-- `services.html` — Full service descriptions and engagement models
-- `blog.html` — Blog listing page
-- `contact.html` — Contact form and direct details
-- `blog/*.html` — Individual blog posts
+- `src/pages/index.astro` — Home with hero, services overview, case studies, testimonials, and recent writing
+- `src/pages/about.astro` — Detailed biography, experience, and values
+- `src/pages/services.astro` — Full service descriptions and engagement models
+- `src/pages/blog.astro` — Blog listing page (generated from the blog content collection)
+- `src/pages/contact.astro` — Contact form and direct details
+- `src/pages/blog/[slug].astro` — Individual blog posts rendered from `src/content/blog/*.md`
+
+## Writing
+
+Blog posts live in `src/content/blog/*.md` with frontmatter for title, category, date, and read time.
+`src/content.config.ts` validates the frontmatter schema.
 
 ## Customization
 
 - Replace the consultant name (Arne Boedt), contact info, and case studies
-- Update colors by editing Tailwind classes or the CSS variables
+- Update colors by editing Tailwind classes or the CSS variables in `src/layouts/BaseLayout.astro`
 - Swap avatars and add real images if desired
 
 This site is intentionally generic so it can be adapted quickly for a real consultancy practice.

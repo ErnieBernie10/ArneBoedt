@@ -1,0 +1,246 @@
+---
+interface Props {
+    title: string;
+    active?: 'about' | 'services' | 'blog' | 'contact';
+    footer?: 'full' | 'compact';
+}
+
+const { title, active, footer = 'full' } = Astro.props;
+
+const links = [
+    { href: '/about', label: 'About', key: 'about' },
+    { href: '/services', label: 'Services', key: 'services' },
+    { href: '/blog', label: 'Blog', key: 'blog' },
+    { href: '/contact', label: 'Contact', key: 'contact' },
+] as const;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style is:global>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+
+        :root {
+            --primary: #1e3a8a;
+        }
+
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+
+        .heading-font {
+            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .nav-link {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link:hover {
+            color: #1e40af;
+        }
+
+        .section-header {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+        }
+
+        .service-card {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                       box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .nav-active {
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .tech-badge {
+            background-color: #f1e7ff;
+            color: #4338ca;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.125rem 0.625rem;
+            border-radius: 9999px;
+        }
+
+        .accent {
+            color: #1e40af;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+        }
+
+        .subtle-grid {
+            background-image:
+                linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+                linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+            background-size: 48px 48px;
+            opacity: 0.4;
+        }
+
+        .metric {
+            transition: all 0.3s ease;
+        }
+
+        .insight-card {
+            transition: all 0.2s ease;
+        }
+
+        .insight-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-scrolled {
+            box-shadow: 0 1px 0 0 #f1f5f9;
+            background-color: rgba(255,255,255,0.96);
+            backdrop-filter: blur(12px);
+        }
+
+        .value-prop {
+            transition: all .2s ease;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+    <!-- Navbar -->
+    <nav id="navbar" class="bg-white border-b border-slate-200 sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="px-8 py-5 flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="w-9 h-9 bg-slate-900 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold text-2xl tracking-tighter">AB</span>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-2xl tracking-tight">Arne Boedt</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
+                    {links.map((link) => (
+                        <a href={link.href} class:list={["nav-link", active === link.key ? "text-slate-900 font-semibold" : "text-slate-600 hover:text-slate-900"]}>{link.label}</a>
+                    ))}
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hidden md:flex items-center gap-x-3">
+                    <a href="/contact"
+                       class="px-5 py-2.5 text-sm font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors">
+                        Book a call
+                    </a>
+                    <a href="/contact"
+                       class="px-5 py-2.5 text-sm font-semibold bg-slate-900 hover:bg-slate-800 text-white rounded-xl transition-all active:scale-[0.985]">
+                        Get in touch
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn"
+                        class="md:hidden w-10 h-10 flex items-center justify-center text-slate-700 hover:bg-slate-100 rounded-xl transition-colors"
+                        aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-6 py-4">
+            <div class="flex flex-col gap-y-1 text-sm font-medium">
+                {links.map((link) => (
+                    <a href={link.href} class:list={["mobile-nav-link px-4 py-3 text-slate-700 rounded-xl hover:bg-slate-100", active === link.key && "font-semibold"]}>{link.label}</a>
+                ))}
+
+                <div class="pt-3 flex flex-col gap-y-2">
+                    <a href="/contact" class="px-4 py-3 text-center font-medium text-slate-700 border border-slate-200 rounded-2xl hover:bg-slate-50">Book a call</a>
+                    <a href="/contact" class="px-4 py-3 text-center font-semibold bg-slate-900 text-white rounded-2xl">Get in touch</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <slot />
+
+    {footer === 'full' ? (
+    <footer class="border-t border-slate-200 bg-white">
+        <div class="max-w-screen-xl mx-auto px-8 py-9">
+            <div class="flex flex-col md:flex-row justify-between gap-y-6 text-sm">
+                <div>
+                    <div class="flex items-center gap-x-2">
+                        <div class="w-6 h-6 bg-slate-900 rounded-lg flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">AB</span>
+                        </div>
+                        <span class="font-semibold tracking-tight">Arne Boedt</span>
+                    </div>
+                    <div class="text-slate-500 mt-1 text-xs">Principal IT Consultant &bull; C# Architecture &amp; AI Transformation</div>
+                </div>
+
+                <div class="flex flex-wrap gap-x-7 gap-y-1 text-slate-600 text-sm">
+                    <a href="/about" class="hover:text-slate-900">About</a>
+                    <a href="/services" class="hover:text-slate-900">Services</a>
+                    <a href="/blog" class="hover:text-slate-900">Blog</a>
+                    <a href="/contact" class="hover:text-slate-900">Contact</a>
+                </div>
+
+                <div class="text-xs text-slate-500 md:text-right">
+                    &copy; 2026 Arne Boedt. All rights reserved.<br>
+                    <span class="text-[10px]">Independent consultancy. No agency markup.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    ) : (
+    <footer class="border-t border-slate-200 bg-white">
+        <div class="max-w-screen-xl mx-auto px-8 py-9 text-sm flex flex-col md:flex-row justify-between gap-y-4">
+            <div class="text-slate-500">&copy; 2026 Arne Boedt</div>
+            <div><a href="/blog" class="hover:underline">All articles</a></div>
+        </div>
+    </footer>
+    )}
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar?.classList.toggle('nav-scrolled', window.scrollY > 10);
+        });
+
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn?.addEventListener('click', () => {
+            const hidden = menu?.classList.toggle('hidden');
+            if (btn) btn.innerHTML = hidden
+                ? '<i class="fa-solid fa-bars text-xl"></i>'
+                : '<i class="fa-solid fa-times text-xl"></i>';
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+            link.addEventListener('click', () => {
+                menu?.classList.add('hidden');
+                if (btn) btn.innerHTML = '<i class="fa-solid fa-bars text-xl"></i>';
+            });
+        });
+    </script>
+</body>
+</html>

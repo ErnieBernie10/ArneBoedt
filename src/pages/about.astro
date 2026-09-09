@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About • Arne Boedt | C# Architecture & AI Transformation" active="about">
+    <!-- Hero / Intro -->
+    <header class="max-w-screen-xl mx-auto pt-14 pb-10 px-8">
+        <div class="max-w-3xl">
+            <div class="uppercase tracking-[2px] text-xs font-semibold text-slate-500">About</div>
+            <h1 class="heading-font text-5xl md:text-6xl leading-none font-semibold tracking-tighter text-slate-900 mt-2">Arne Boedt</h1>
+            <p class="mt-3 text-2xl text-slate-600">Principal IT Consultant • C# Architecture &amp; Enterprise AI</p>
+        </div>
+    </header>
+
+    <!-- Main Bio -->
+    <section class="max-w-screen-xl mx-auto px-8 pb-12">
+        <div class="grid md:grid-cols-12 gap-x-12">
+            <div class="md:col-span-7">
+                <div class="prose prose-slate max-w-none text-[15.5px] leading-relaxed">
+                    <p>I've spent the last 16 years designing and evolving large-scale systems built on the .NET platform. Before founding my independent practice, I led architecture teams at a global industrial technology company and later at a fast-growing fintech scale-up.</p>
+
+                    <p class="mt-5">My work sits at the intersection of two powerful forces: the maturity of modern C# and .NET as an enterprise platform, and the rapid emergence of practical AI capabilities that can transform how organizations operate.</p>
+
+                    <p class="mt-5">I believe the best outcomes happen when architecture decisions and AI strategy are considered together — not as separate workstreams. A well-designed .NET platform becomes the perfect foundation for safe, governed, and high-impact AI adoption.</p>
+                </div>
+            </div>
+
+            <div class="md:col-span-5 mt-8 md:mt-0">
+                <div class="bg-white border border-slate-200 rounded-3xl p-7">
+                    <h3 class="font-semibold mb-4">Quick facts</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex gap-x-3"><span class="font-medium w-28 text-slate-500">Location</span> <span>Belgium (remote-first)</span></li>
+                        <li class="flex gap-x-3"><span class="font-medium w-28 text-slate-500">Experience</span> <span>16 years</span></li>
+                        <li class="flex gap-x-3"><span class="font-medium w-28 text-slate-500">Clients</span> <span>40+ organizations</span></li>
+                        <li class="flex gap-x-3"><span class="font-medium w-28 text-slate-500">Focus</span> <span>Enterprise .NET + AI</span></li>
+                        <li class="flex gap-x-3"><span class="font-medium w-28 text-slate-500">Languages</span> <span>English, Dutch, French</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="max-w-screen-xl mx-auto px-8 py-12 border-t border-slate-200">
+        <h2 class="uppercase tracking-[2px] text-xs font-semibold text-slate-500 mb-6">Experience</h2>
+
+        <div class="space-y-8 max-w-4xl">
+            <div class="flex flex-col md:flex-row md:gap-x-8">
+                <div class="md:w-44 flex-shrink-0">
+                    <div class="font-semibold">2019 — Present</div>
+                    <div class="text-sm text-slate-500">Independent Consultant</div>
+                </div>
+                <div class="flex-1 mt-1 md:mt-0">
+                    <div class="font-semibold">Principal Consultant</div>
+                    <div class="text-sm text-slate-600">Arne Boedt Consulting — Helping organizations build future-proof .NET platforms and adopt AI responsibly.</div>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:gap-x-8">
+                <div class="md:w-44 flex-shrink-0">
+                    <div class="font-semibold">2015 — 2019</div>
+                    <div class="text-sm text-slate-500">Fintech</div>
+                </div>
+                <div class="flex-1 mt-1 md:mt-0">
+                    <div class="font-semibold">Head of Architecture</div>
+                    <div class="text-sm text-slate-600">Led the complete modernization of a core banking platform from .NET Framework to .NET Core. Built the internal platform team and established architecture governance practices still used today.</div>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:gap-x-8">
+                <div class="md:w-44 flex-shrink-0">
+                    <div class="font-semibold">2011 — 2015</div>
+                    <div class="text-sm text-slate-500">Industrial Tech</div>
+                </div>
+                <div class="flex-1 mt-1 md:mt-0">
+                    <div class="font-semibold">Lead Software Architect</div>
+                    <div class="text-sm text-slate-600">Designed the distributed control systems for next-generation manufacturing equipment. Drove the adoption of domain-driven design and event sourcing across multiple product lines.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values / Approach -->
+    <section class="max-w-screen-xl mx-auto px-8 py-12 border-t border-slate-200 bg-white">
+        <h2 class="section-header tracking-tighter mb-8">What I believe</h2>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <div>
+                <div class="text-xl font-semibold tracking-tight mb-2">Architecture is a team sport</div>
+                <p class="text-sm text-slate-600">The best architectures emerge from continuous collaboration between architects, engineers, and business stakeholders — not from ivory towers.</p>
+            </div>
+            <div>
+                <div class="text-xl font-semibold tracking-tight mb-2">AI must earn its place</div>
+                <p class="text-sm text-slate-600">I only recommend AI capabilities when they solve real problems with clear ROI. Hype has no place in enterprise architecture.</p>
+            </div>
+            <div>
+                <div class="text-xl font-semibold tracking-tight mb-2">Simplicity scales</div>
+                <p class="text-sm text-slate-600">The systems that last are the ones that remain understandable by the next generation of engineers who will maintain them.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speaking & Writing -->
+    <section class="max-w-screen-xl mx-auto px-8 py-12">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div>
+                <h3 class="font-semibold text-xl">Speaking &amp; writing</h3>
+                <p class="text-sm text-slate-600">I regularly share practical lessons from the field.</p>
+            </div>
+            <a href="/blog" class="text-sm font-medium">Read the blog →</a>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+            <div class="px-4 py-2 bg-white border border-slate-200 rounded-2xl text-sm">.NET Conf 2025 – “Modular Monoliths Done Right”</div>
+            <div class="px-4 py-2 bg-white border border-slate-200 rounded-2xl text-sm">NDC Oslo 2024 – “LLMs in Production .NET Systems”</div>
+            <div class="px-4 py-2 bg-white border border-slate-200 rounded-2xl text-sm">Microsoft Reactor – “Responsible AI for Architects”</div>
+        </div>
+    </section>
+</BaseLayout>

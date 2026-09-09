@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const formatDate = (date: Date) =>
+    date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+---
+
+<BaseLayout title="Blog • Arne Boedt | C# Architecture & AI Transformation" active="blog">
+    <header class="max-w-screen-xl mx-auto pt-14 pb-10 px-8">
+        <div>
+            <div class="uppercase tracking-[2px] text-xs font-semibold text-slate-500">Writing</div>
+            <h1 class="heading-font text-5xl md:text-6xl font-semibold tracking-tighter mt-1">Blog &amp; Insights</h1>
+            <p class="mt-3 text-lg text-slate-600 max-w-md">Practical thoughts on modern .NET architecture and responsible AI adoption in enterprise environments.</p>
+        </div>
+    </header>
+
+    <!-- Blog listing -->
+    <section class="max-w-screen-xl mx-auto px-8 pb-16">
+        <div class="grid md:grid-cols-2 gap-6">
+            {posts.map((post) => (
+                <a href={`/blog/${post.id}`} class="group block bg-white border border-slate-200 hover:border-slate-300 rounded-3xl p-7 transition-all">
+                    <div class="flex items-center justify-between text-xs">
+                        <span class={`font-medium ${post.data.accent}`}>{post.data.category}</span>
+                        <span class="text-slate-500">{formatDate(post.data.pubDate)}</span>
+                    </div>
+                    <h3 class="mt-4 font-semibold text-2xl tracking-tight group-hover:text-slate-900">{post.data.title}</h3>
+                    <p class="mt-3 text-slate-600 text-sm line-clamp-3">{post.data.description}</p>
+                    <div class="mt-5 flex items-center text-sm font-medium text-slate-700 group-hover:text-slate-900">
+                        Read article <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                    </div>
+                </a>
+            ))}
+        </div>
+
+        <div class="mt-12 text-center text-sm text-slate-500">
+            More articles coming soon. Subscribe via email or follow on LinkedIn for updates.
+        </div>
+    </section>
+</BaseLayout>
