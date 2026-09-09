@@ -1,0 +1,8 @@
+[site]
+install = "true"
+dev = "python3 -m http.server 4321 --bind 0.0.0.0"
+build = "true"
+port = 4321
+
+[open]
+code = ["*.html", "blog/**/*.html"]
