@@ -46,6 +46,13 @@ npm run preview  # serve the production build
 Blog posts live in `src/content/blog/*.md` with frontmatter for title, category, date, and read time.
 `src/content.config.ts` validates the frontmatter schema.
 
+## Amend
+
+`amend.toml` declares which source files Amend may change and protects the content schema and
+dynamic article renderer. Its `article` recipe creates routes below `/blog` from the repository-owned
+template in `.amend/templates/article.md` and may update only the marked recent-writing region on the
+home page.
+
 ## Customization
 
 - Replace the consultant name (Arne Boedt), contact info, and case studies

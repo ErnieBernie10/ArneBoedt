@@ -1,8 +1,33 @@
+version = 1
+
 [site]
 install = "npm install"
 dev = "npx astro dev --host 0.0.0.0 --port 4321"
 build = "npx astro build"
 port = 4321
 
-[open]
-code = ["src/**/*.astro", "src/content/**/*.md"]
+[code]
+open = [
+  "src/pages/**/*.astro",
+  "src/layouts/**/*.astro",
+  "src/content/**/*.md",
+  "src/content.config.ts",
+]
+shut = [
+  "src/pages/blog/[slug].astro",
+  "src/content.config.ts",
+]
+
+[[pages]]
+name = "article"
+label = "Article"
+route_root = "/blog"
+template = ".amend/templates/article.md"
+create = "src/content/blog/{path}.md"
+instruction = "Write a complete article using the template's frontmatter contract and set pubDate to today's date. Keep the three newest articles in the homepage region, newest first. Do not change the article renderer or content schema."
+
+[[pages.regions]]
+name = "recent-writing"
+path = "src/pages/index.astro"
+start = "<!-- amend:recent-writing:start -->"
+end = "<!-- amend:recent-writing:end -->"
