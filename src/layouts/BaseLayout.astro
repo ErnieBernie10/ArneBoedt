@@ -6,8 +6,7 @@ interface Props {
 }
 
 const { title, active, footer = 'full' } = Astro.props;
-const configuredBase = process.env.AMEND_BASE ?? '/';
-const base = configuredBase.endsWith('/') ? configuredBase : `${configuredBase}/`;
+const base = import.meta.env.DEV ? '/_amend/site/' : '/';
 
 const links = [
     { href: 'about', label: 'About', key: 'about' },

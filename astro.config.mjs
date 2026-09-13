@@ -1,9 +1,14 @@
 import { defineConfig } from 'astro/config';
 
-const amendBase = process.env.AMEND_BASE;
-
 export default defineConfig({
   compressHTML: true,
   devToolbar: { enabled: false },
-  ...(amendBase ? { vite: { base: amendBase } } : {}),
+  integrations: [{
+    name: 'development-base',
+    hooks: {
+      'astro:config:setup': ({ command, updateConfig }) => {
+        if (command === 'dev') updateConfig({ vite: { base: '/_amend/site' } });
+      },
+    },
+  }],
 });
