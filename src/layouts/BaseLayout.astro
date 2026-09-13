@@ -6,12 +6,14 @@ interface Props {
 }
 
 const { title, active, footer = 'full' } = Astro.props;
+const configuredBase = process.env.AMEND_BASE ?? '/';
+const base = configuredBase.endsWith('/') ? configuredBase : `${configuredBase}/`;
 
 const links = [
-    { href: '/about', label: 'About', key: 'about' },
-    { href: '/services', label: 'Services', key: 'services' },
-    { href: '/blog', label: 'Blog', key: 'blog' },
-    { href: '/contact', label: 'Contact', key: 'contact' },
+    { href: 'about', label: 'About', key: 'about' },
+    { href: 'services', label: 'Services', key: 'services' },
+    { href: 'blog', label: 'Blog', key: 'blog' },
+    { href: 'contact', label: 'Contact', key: 'contact' },
 ] as const;
 ---
 
@@ -20,6 +22,7 @@ const links = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href={base}>
     <title>{title}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -146,11 +149,11 @@ const links = [
 
                 <!-- CTA Buttons -->
                 <div class="hidden md:flex items-center gap-x-3">
-                    <a href="/contact"
+                    <a href="contact"
                        class="px-5 py-2.5 text-sm font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors">
                         Book a call
                     </a>
-                    <a href="/contact"
+                    <a href="contact"
                        class="px-5 py-2.5 text-sm font-semibold bg-slate-900 hover:bg-slate-800 text-white rounded-xl transition-all active:scale-[0.985]">
                         Get in touch
                     </a>
@@ -173,8 +176,8 @@ const links = [
                 ))}
 
                 <div class="pt-3 flex flex-col gap-y-2">
-                    <a href="/contact" class="px-4 py-3 text-center font-medium text-slate-700 border border-slate-200 rounded-2xl hover:bg-slate-50">Book a call</a>
-                    <a href="/contact" class="px-4 py-3 text-center font-semibold bg-slate-900 text-white rounded-2xl">Get in touch</a>
+                    <a href="contact" class="px-4 py-3 text-center font-medium text-slate-700 border border-slate-200 rounded-2xl hover:bg-slate-50">Book a call</a>
+                    <a href="contact" class="px-4 py-3 text-center font-semibold bg-slate-900 text-white rounded-2xl">Get in touch</a>
                 </div>
             </div>
         </div>
@@ -197,10 +200,10 @@ const links = [
                 </div>
 
                 <div class="flex flex-wrap gap-x-7 gap-y-1 text-slate-600 text-sm">
-                    <a href="/about" class="hover:text-slate-900">About</a>
-                    <a href="/services" class="hover:text-slate-900">Services</a>
-                    <a href="/blog" class="hover:text-slate-900">Blog</a>
-                    <a href="/contact" class="hover:text-slate-900">Contact</a>
+                    <a href="about" class="hover:text-slate-900">About</a>
+                    <a href="services" class="hover:text-slate-900">Services</a>
+                    <a href="blog" class="hover:text-slate-900">Blog</a>
+                    <a href="contact" class="hover:text-slate-900">Contact</a>
                 </div>
 
                 <div class="text-xs text-slate-500 md:text-right">
@@ -214,7 +217,7 @@ const links = [
     <footer class="border-t border-slate-200 bg-white">
         <div class="max-w-screen-xl mx-auto px-8 py-9 text-sm flex flex-col md:flex-row justify-between gap-y-4">
             <div class="text-slate-500">&copy; 2026 Arne Boedt</div>
-            <div><a href="/blog" class="hover:underline">All articles</a></div>
+            <div><a href="blog" class="hover:underline">All articles</a></div>
         </div>
     </footer>
     )}

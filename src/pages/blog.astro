@@ -23,7 +23,7 @@ const formatDate = (date: Date) =>
     <section class="max-w-screen-xl mx-auto px-8 pb-16">
         <div class="grid md:grid-cols-2 gap-6">
             {posts.map((post) => (
-                <a href={`/blog/${post.id}`} class="group block bg-white border border-slate-200 hover:border-slate-300 rounded-3xl p-7 transition-all">
+                <a href={`blog/${post.id}`} class="group block bg-white border border-slate-200 hover:border-slate-300 rounded-3xl p-7 transition-all">
                     <div class="flex items-center justify-between text-xs">
                         <span class={`font-medium ${post.data.accent}`}>{post.data.category}</span>
                         <span class="text-slate-500">{formatDate(post.data.pubDate)}</span>
