@@ -2,7 +2,7 @@ version = 1
 
 [site]
 install = "npm install"
-dev = "npx astro dev --host 0.0.0.0 --port 4321"
+dev = "AMEND_BASE=/_amend/site npx astro dev --host 0.0.0.0 --port 4321"
 build = "npx astro build"
 port = 4321
 
