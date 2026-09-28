@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import collection from '../../../content/demo/quotes.json';
+
+export function getStaticPaths() {
+    return collection.quotes.map((quote) => ({
+        params: { slug: quote.slug }, props: { quote },
+    }));
+}
+
+const { quote } = Astro.props;
+---
+
+<BaseLayout title="Sample quote • Arne Boedt" active="blog" footer="compact">
+    <main class="max-w-screen-md mx-auto px-8 pt-12 pb-20">
+        <a href="demo" class="text-sm text-slate-500 hover:text-slate-700">← Content examples</a>
+        <p class="mt-7 text-xs font-semibold text-indigo-700">PLACEHOLDER · TITLELESS ITEM</p>
+        <h1 class="heading-font mt-3 text-4xl font-semibold tracking-tighter">A quote-shaped example</h1>
+        <p class="mt-5 text-slate-600">These are sample words, not a real testimonial.</p>
+        <article data-demo-quote={quote.slug} class="mt-9 prose prose-slate max-w-none" set:html={quote.body_html} />
+    </main>
+</BaseLayout>

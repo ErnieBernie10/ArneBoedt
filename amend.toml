@@ -11,6 +11,8 @@ open = [
   "src/pages/**/*.astro",
   "src/layouts/**/*.astro",
   "src/content/**/*.md",
+  "src/content/demo/**/*.html",
+  "src/content/demo/**/*.json",
   "src/content.config.ts",
 ]
 shut = [
@@ -22,12 +24,80 @@ shut = [
 name = "article"
 label = "Article"
 route_root = "/blog"
-template = ".amend/templates/article.md"
+template = "src/content/blog/amend-sample.md"
 create = "src/content/blog/{path}.md"
-instruction = "Write a complete article using the template's frontmatter contract and set pubDate to today's date. Keep the three newest articles in the homepage region, newest first. Do not change the article renderer or content schema."
+instruction = "Use the owner's exact title, description and complete body. Copy every other frontmatter value from the sample unchanged; the authored page gate will refuse changes to that metadata. Do not change the article renderer, content schema or homepage."
 
 [[pages.regions]]
 name = "recent-writing"
 path = "src/pages/index.astro"
 start = "<!-- amend:recent-writing:start -->"
 end = "<!-- amend:recent-writing:end -->"
+
+[[pages]]
+name = "sample-story-page"
+label = "Sample story"
+route_root = "/demo/stories"
+template = "src/content/demo/stories/example.html"
+create = "src/content/demo/stories/{path}.html"
+
+# Each document names both its source and the exact region rendered on its own route.
+# Declarations locate content; [code] independently defines which paths may be changed.
+[[documents]]
+name = "sample-article"
+format = "markdown-frontmatter-v1"
+route_root = "/blog"
+source = "src/content/blog/{path}.md"
+container_selector = "article .prose"
+title_selector = "article h1"
+introduction_selector = "article .prose > p.lead"
+body_selector = "article .prose > :not(.lead)"
+title_field = "title"
+introduction_field = "description"
+
+[[documents]]
+name = "sample-story"
+format = "html-fragment-v1"
+route_root = "/demo/stories"
+source = "src/content/demo/stories/{path}.html"
+container_selector = "article[data-demo-story]"
+body_selector = "article[data-demo-story] > *"
+
+[[documents]]
+name = "sample-note"
+format = "html-field-json-v1"
+route_root = "/demo/notes"
+source = "src/content/demo/notes/{path}.json"
+container_selector = "article[data-demo-note]"
+body_selector = "article[data-demo-note] > *"
+body_field = "note_html"
+
+[[documents]]
+name = "sample-feature"
+format = "html-collection-item-json-v1"
+route_root = "/demo/features"
+source = "src/content/demo/features.json"
+container_selector = "article[data-demo-feature='{slug}']"
+title_selector = "article[data-demo-feature='{slug}'] > h1"
+body_selector = "article[data-demo-feature='{slug}'] > :not(h1)"
+collection_field = "features"
+key_field = "slug"
+title_field = "heading"
+body_field = "body_html"
+
+[[documents]]
+name = "sample-quote"
+format = "html-collection-item-json-v1"
+route_root = "/demo/quotes"
+source = "src/content/demo/quotes.json"
+container_selector = "article[data-demo-quote='{slug}']"
+body_selector = "article[data-demo-quote='{slug}'] > *"
+collection_field = "quotes"
+key_field = "slug"
+body_field = "body_html"
+
+[[collection_item_creations]]
+name = "new-feature"
+document = "sample-feature"
+source = "src/content/demo/features.json"
+example_route = "/demo/features/example"

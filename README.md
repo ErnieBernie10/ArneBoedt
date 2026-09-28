@@ -49,10 +49,12 @@ Blog posts live in `src/content/blog/*.md` with frontmatter for title, category,
 ## Amend
 
 `amend.toml` declares which source files Amend may change and protects the content schema and
-dynamic article renderer. Its `article` recipe creates routes below `/blog` from the repository-owned
-template in `.amend/templates/article.md` and may update only the marked recent-writing region on the
-home page. The Amend dev command gives Vite the `/_amend/site` transport base; production builds keep
-the site's normal `/` base.
+dynamic article renderer. Its `article` recipe creates routes below `/blog` from the rendered
+example in `src/content/blog/amend-sample.md`. The `/demo` page links to labelled placeholder
+examples for standalone HTML, a JSON HTML field, and titled and titleless JSON collection items.
+Separate recipes allow a new story page or feature item. Source and rendered content must agree
+before Amend offers exact writing; accepting a request does not publish it. The Amend dev command
+gives Vite the `/_amend/site` transport base; production builds keep the site's normal `/` base.
 
 ## Customization
 

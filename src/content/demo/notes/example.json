@@ -1,0 +1,4 @@
+{
+  "topic": "Placeholder note",
+  "note_html": "<p>This note is an example of HTML stored in one JSON field.</p><p>Other JSON fields remain outside the writing boundary.</p>"
+}

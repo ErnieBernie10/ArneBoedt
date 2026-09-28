@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import collection from '../../../content/demo/features.json';
+
+export function getStaticPaths() {
+    return collection.features.map((feature) => ({
+        params: { slug: feature.slug }, props: { feature },
+    }));
+}
+
+const { feature } = Astro.props;
+---
+
+<BaseLayout title={`${feature.heading} • Arne Boedt`} active="blog" footer="compact">
+    <main class="max-w-screen-md mx-auto px-8 pt-12 pb-20">
+        <a href="demo" class="text-sm text-slate-500 hover:text-slate-700">← Content examples</a>
+        <p class="mt-7 text-xs font-semibold text-indigo-700">PLACEHOLDER · JSON COLLECTION ITEM</p>
+        <p class="mt-4 text-slate-600">The title and body below belong to one item. New items need their own creation choice.</p>
+        <article data-demo-feature={feature.slug} class="mt-9 prose prose-slate max-w-none">
+            <h1>{feature.heading}</h1>
+            <Fragment set:html={feature.body_html} />
+        </article>
+    </main>
+</BaseLayout>

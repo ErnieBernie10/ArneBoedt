@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import note from '../../../content/demo/notes/example.json';
+---
+
+<BaseLayout title="Sample note • Arne Boedt" active="blog" footer="compact">
+    <main class="max-w-screen-md mx-auto px-8 pt-12 pb-20">
+        <a href="demo" class="text-sm text-slate-500 hover:text-slate-700">← Content examples</a>
+        <p class="mt-7 text-xs font-semibold text-indigo-700">PLACEHOLDER · JSON HTML FIELD</p>
+        <h1 class="heading-font mt-3 text-4xl font-semibold tracking-tighter">{note.topic}</h1>
+        <p class="mt-5 text-slate-600">The heading comes from an unowned JSON field. The text below is the editable HTML field.</p>
+        <article data-demo-note class="mt-9 prose prose-slate max-w-none" set:html={note.note_html} />
+    </main>
+</BaseLayout>

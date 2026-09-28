@@ -1,0 +1,9 @@
+{
+  "features": [
+    {
+      "slug": "example",
+      "heading": "Sample feature (demo)",
+      "body_html": "<p>This placeholder feature has an editable title and complete body.</p><p>A new feature can be appended only through the separate creation recipe.</p>"
+    }
+  ]
+}
